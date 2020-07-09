@@ -40,6 +40,8 @@ let questions = [
 const bonus = 10;
 const maxQuestion = 3;
 
+//Funtion responsible for the game to start, uses "getnewquestion" function 
+//which displays questions 
 startGame = () => {
   questionCounter = 0;
   score = 0;
