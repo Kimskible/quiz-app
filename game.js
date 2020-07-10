@@ -1,6 +1,7 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-
+const questionCounterText = document.getElementById("questionCounter")
+const scoreText = document.getElementById("score")
 
 let currentQuestion = {};
 let acceptAnswers = false;
@@ -55,6 +56,8 @@ getNewQuestion = () =>{
     return window.location.assign("/end.html")
   }
   questionCounter++;
+  questionCounterText.innerText = `${questionCounter}/${maxQuestion}`;
+
   const questionIndex = Math.floor(Math.random() * availableQuestion.length);
   currentQuestion = availableQuestion[questionIndex];
   question.innerText = currentQuestion.question;
@@ -63,7 +66,6 @@ getNewQuestion = () =>{
       const number = choice.dataset['number'];
       choice.innerText = currentQuestion['choice' + number];
     });
-
     //Take avaiable questions array and take out the question that we used
     availableQuestion.splice(questionIndex, 1);
     acceptAnswers = true;
@@ -77,16 +79,25 @@ choices.forEach(choice =>{
     const selectedAnswer = selectedChoice.dataset['number'];
 
 
-    const classToApply = selectedAnswer == currentQuestion.answer ? "correct": "incorrect";
+    const classToApply = 
+      selectedAnswer == currentQuestion.answer ? "correct": "incorrect";
+    if (classToApply == "correct"){
+      incrementScore(bonus);
+      }
+      
     selectedChoice.parentElement.classList.add(classToApply);
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
-    }, 500);
-
-      getNewQuestion();
-    });
+    }, 1000);
+  });
 });
+
+incrementScore = num => {
+  score += num;
+  scoreText.innerText = score;
+}
+
 
 
 startGame();
