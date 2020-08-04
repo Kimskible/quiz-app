@@ -77,10 +77,11 @@ choices.forEach(choice =>{
     acceptAnswers = false;
     const selectedChoice = e.target;
     const selectedAnswer = selectedChoice.dataset['number'];
-
+ 
 
     const classToApply = 
       selectedAnswer == currentQuestion.answer ? "correct": "incorrect";
+      
     if (classToApply == "correct"){
       incrementScore(bonus);
       }
@@ -93,11 +94,11 @@ choices.forEach(choice =>{
   });
 });
 
+//increment score
 incrementScore = num => {
   score += num;
   scoreText.innerText = score;
 }
-
 
 
 startGame();
