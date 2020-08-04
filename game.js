@@ -56,8 +56,9 @@ getNewQuestion = () =>{
     return window.location.assign("/end.html")
   }
   questionCounter++;
-  progressText.innerText = `Question ${questionCounter}/${maxQuestion}`;
+  progressText.innerText = `Questions ${questionCounter}/${maxQuestion}`;
   // Update progress bar 
+  progressBarFull.style.width = `${(questionCounter / maxQuestion) * 100}%`;
 
   const questionIndex = Math.floor(Math.random() * availableQuestion.length);
   currentQuestion = availableQuestion[questionIndex];
